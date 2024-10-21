@@ -34,7 +34,7 @@
                     )" />
                 </div>
             </div>
-            <button class="w-full">Filter</button>
+            <x-button class="w-full">Filter</x-button>
         </form>
     </x-card>
 
@@ -49,9 +49,9 @@
     @endforeach
 
 
-    <div class="mt-6 mb-8"> 
+    <div class="mt-6 mb-8">
         <ul class="flex justify-center space-x-2">
-           
+
             <li>
                 @if ($jobs->onFirstPage())
                     <span class="px-4 py-2 text-slate-400 bg-slate-300 rounded-lg cursor-not-allowed">
@@ -65,7 +65,7 @@
                 @endif
             </li>
 
-          
+
             @foreach ($jobs->getUrlRange(1, $jobs->lastPage()) as $page => $url)
                 <li>
                     <a href="{{ $url . '&' . http_build_query(request()->except('page')) }}"
@@ -78,7 +78,7 @@
                 </li>
             @endforeach
 
-           
+
             <li>
                 @if ($jobs->hasMorePages())
                     <a href="{{ $jobs->nextPageUrl() . '&' . http_build_query(request()->except('page')) }}"

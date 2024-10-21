@@ -21,8 +21,10 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+
         $credentials = $request->only('email', 'password');
         $remember = $request->filled('remember');
+
         if (Auth::attempt($credentials, $remember)) {
             return redirect()->intended('/');
         } else {
