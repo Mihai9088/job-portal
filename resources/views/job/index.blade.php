@@ -49,51 +49,6 @@
     @endforeach
 
 
-    <div class="mt-6 mb-8">
-        <ul class="flex justify-center space-x-2">
-
-            <li>
-                @if ($jobs->onFirstPage())
-                    <span class="px-4 py-2 text-slate-400 bg-slate-300 rounded-lg cursor-not-allowed">
-                        Previous
-                    </span>
-                @else
-                    <a href="{{ $jobs->previousPageUrl() . '&' . http_build_query(request()->except('page')) }}"
-                        class="px-4 py-2 text-white bg-slate-600 rounded-lg hover:bg-slate-700">
-                        Previous
-                    </a>
-                @endif
-            </li>
-
-
-            @foreach ($jobs->getUrlRange(1, $jobs->lastPage()) as $page => $url)
-                <li>
-                    <a href="{{ $url . '&' . http_build_query(request()->except('page')) }}"
-                        class="px-4 py-2 rounded-lg
-                         {{ $page == $jobs->currentPage()
-                             ? 'bg-gray-800 text-white'
-                             : 'bg-slate-400 text-slate-800 hover:bg-slate-500 hover:text-white' }}">
-                        {{ $page }}
-                    </a>
-                </li>
-            @endforeach
-
-
-            <li>
-                @if ($jobs->hasMorePages())
-                    <a href="{{ $jobs->nextPageUrl() . '&' . http_build_query(request()->except('page')) }}"
-                        class="px-4 py-2 text-white bg-slate-600 rounded-lg hover:bg-slate-700">
-                        Next
-                    </a>
-                @else
-                    <span class="px-4 py-2 text-slate-400 bg-slate-300 rounded-lg cursor-not-allowed">
-                        Next
-                    </span>
-                @endif
-            </li>
-        </ul>
-    </div>
-
 
 
 

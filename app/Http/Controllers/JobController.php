@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class JobController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->authorize('viewAny', Job::class);
         $filters = request()->only(
             'search',
             'min_salary',
@@ -22,7 +25,7 @@ class JobController extends Controller
 
         return view(
             'job.index',
-            ['jobs' => Job::with('employer')->filter($filters)->paginate(10)]
+            ['jobs' => Job::with('employer')->latest()->filter($filters)->get()]
         );
     }
 
@@ -47,6 +50,7 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
+        $this->authorize('view', $job);
         return view(
             'job.show',
             ['job' => $job->load('employer.jobs')]
